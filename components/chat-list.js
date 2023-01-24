@@ -127,7 +127,7 @@ function ChatList() {
                         <h3 className="text-xs font-semibold uppercase text-gray-400 mb-1">Chats</h3>
                         <div className="divide-y divide-gray-200">
                             {chatList()}
-
+ 
                         </div>
                     </div>
                 </div>

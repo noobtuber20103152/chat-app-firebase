@@ -1,6 +1,6 @@
 import { auth, db } from '../../firebase-config';
 import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection, useDocumentData } from 'react-firebase-hooks/firestore';
 import { addDoc, collection, doc, orderBy, query, serverTimestamp } from 'firebase/firestore';
@@ -67,8 +67,17 @@ function Index() {
       })
     }
   }
+  const bottomOfChat = useRef();
+  useEffect(() => {
+    setTimeout(() => {
+      bottomOfChat.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      })
+    }, 100)
+  }, [messages])
   return <>
-    <body className="flex flex-col items-center justify-center w-screen h-[100vh] bg-gray-100 text-gray-800 ">
+    <body className="flex flex-col items-center justify-center w-screen h-screen bg-gray-100 text-gray-800 ">
       <div className="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
           {loadingContent()}
@@ -101,6 +110,7 @@ function Index() {
               </>
             }
           })}
+          <div ref={bottomOfChat}></div>
         </div>
         <div className="bg-gray-300 p-4 flex justify-between">
           <input onChange={onchange} value={msg} className=" items-center outline-none h-10 w-[80%] inline rounded px-3 text-sm" type="text" placeholder="Type your message…" />
