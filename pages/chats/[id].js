@@ -69,12 +69,10 @@ function Index() {
   }
   const bottomOfChat = useRef();
   useEffect(() => {
-    setTimeout(() => {
-      bottomOfChat.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      })
-    }, 100)
+    bottomOfChat.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    })
   }, [messages])
   return <>
     <body className="flex flex-col items-center justify-center w-screen h-screen bg-gray-100 text-gray-800 ">
