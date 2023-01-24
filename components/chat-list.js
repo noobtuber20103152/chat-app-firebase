@@ -9,6 +9,7 @@ import AddUserModel from './user-component/add-user-model'
 import User from './user-component/user'
 import { useCollection } from "react-firebase-hooks/firestore"
 import getOtherEmail from '@/utils/getOtherEmail';
+import Script from 'next/script';
 function ChatList() {
     const [ModelVisible, setModelVisible] = useState(false);
     const openModel = () => {
@@ -78,16 +79,22 @@ function ChatList() {
         });
     }
     // console.log(allContact);
+    const [state, setstate] = useState(false);
     return <>
         <Head>
-            <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+            {/* <script src="https://unpkg.com/tailwindcss-jit-cdn" ></script> */}
+
         </Head>
-        <AddUserModel closeModel={closeModel} ModelVisible={ModelVisible} />
-        <section className="flex   flex-col justify-center antialiased bg-gray-50 text-gray-600 h-full">
+        <Script onReady={() => {
+            setstate(true)
+        }} src="https://unpkg.com/tailwindcss-jit-cdn" />
+
+        {state && <AddUserModel closeModel={closeModel} ModelVisible={ModelVisible} />}
+        {state && <section className="flex   flex-col justify-center antialiased bg-gray-50 text-gray-600 h-full">
             <div className="h-full">
                 <div className="relative w-full bg-white  rounded-lg">
                     <header className="pt-6 pb-4 px-5 border-b border-gray-200">
-                        <div className="flex justify-between items-center mb-3">
+                        {currentUser && <div className="flex justify-between items-center mb-3">
                             <div className="flex items-center">
                                 <a className="inline-flex items-start mr-3" href="#0">
                                     <img className="rounded-full" src={currentUser?.photoUrl} width="48" height="48" alt="Lauren Marsano" />
@@ -107,7 +114,7 @@ function ChatList() {
                                     </svg>
                                 </button>
                             </div>
-                        </div>
+                        </div>}
                         {/* <div className="flex flex-wrap justify-center sm:justify-start space-x-4">
                             <div className="flex items-center">
                                 <svg className="w-4 h-4 fill-current flex-shrink-0 text-gray-400" viewBox="0 0 16 16">
@@ -127,7 +134,7 @@ function ChatList() {
                         <h3 className="text-xs font-semibold uppercase text-gray-400 mb-1">Chats</h3>
                         <div className="divide-y divide-gray-200">
                             {chatList()}
- 
+
                         </div>
                     </div>
                 </div>
@@ -144,7 +151,7 @@ function ChatList() {
                 </svg>
                 <span>Logout</span>
             </button>
-        </section>
+        </section>}
     </>
 }
 
