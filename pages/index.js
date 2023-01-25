@@ -39,7 +39,9 @@ export default function Home() {
       <Head>
         <title>Chat List</title>
       </Head>
+      <div className='mx-auto md:w-4/12 w-full'>
       <ChatList />
+      </div>
     </>
   }
 
